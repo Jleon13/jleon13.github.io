@@ -1,0 +1,217 @@
+:root {
+  --bg: #faf6f0;
+  --ink: #2b2420;
+  --ink-soft: #5b5147;
+  --accent: #a9482f;
+  --accent-soft: #e8d9c9;
+  --card-bg: #ffffff;
+  --border: #e4d8c8;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Nav */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(250, 246, 240, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+nav .brand {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+nav .links a {
+  color: var(--ink-soft);
+  margin-left: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+nav .links a:first-child { margin-left: 0; }
+nav .links a:hover { color: var(--accent); text-decoration: none; }
+
+/* Hero */
+.hero {
+  padding: 64px 0 40px;
+  text-align: center;
+}
+.hero img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--card-bg);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  margin: 0 0 6px;
+}
+.hero .tagline {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.hero p.intro {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--ink-soft);
+}
+.social-links {
+  margin-top: 18px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.social-links a {
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--ink);
+}
+.social-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Sections */
+section {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+}
+section h2 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+}
+
+/* Timeline (education/experience) */
+.timeline-item {
+  margin-bottom: 22px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent-soft);
+}
+.timeline-item .when {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.timeline-item h3 {
+  margin: 4px 0 4px;
+  font-size: 1.1rem;
+}
+.timeline-item p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* Project cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.card p {
+  margin: 0 0 10px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Blog list */
+.post-list-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.post-list-item:last-child { border-bottom: none; }
+.post-list-item .date {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.post-list-item h3 {
+  margin: 4px 0 6px;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+}
+.post-list-item h3 a { color: var(--ink); }
+.post-list-item h3 a:hover { color: var(--accent); }
+.post-list-item p { color: var(--ink-soft); margin: 0; }
+
+/* Single post */
+.post-header .date {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.post-header h1 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  margin: 6px 0 24px;
+}
+.post-body p {
+  margin-bottom: 18px;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+/* Contact */
+.contact-list a {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+footer {
+  text-align: center;
+  padding: 32px 0 48px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
