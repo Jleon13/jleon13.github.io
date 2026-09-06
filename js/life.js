@@ -9,9 +9,9 @@
   var CELL = 16;
   var SEED_DENSITY = 0.18;
   var TICK_MS = 400;
-  var DOT_COLOR = "rgba(169, 72, 47, 0.16)";
+  var ACCENT = "169, 72, 47";
 
-  var cols, rows, grid, dpr;
+  var cols, rows, grid, style, dpr;
 
   function resize() {
     var rect = hero.getBoundingClientRect();
@@ -25,10 +25,24 @@
     draw();
   }
 
+  // Each live cell gets its own random size/opacity, assigned once at
+  // birth and kept while it stays alive, so the pattern reads as
+  // textured/organic rather than a uniform field of identical marks.
+  function randomStyle() {
+    return {
+      size: CELL * (0.34 + Math.random() * 0.4),
+      alpha: 0.08 + Math.random() * 0.2,
+    };
+  }
+
   function seed() {
     grid = new Uint8Array(cols * rows);
+    style = new Array(cols * rows);
     for (var i = 0; i < grid.length; i++) {
-      grid[i] = Math.random() < SEED_DENSITY ? 1 : 0;
+      if (Math.random() < SEED_DENSITY) {
+        grid[i] = 1;
+        style[i] = randomStyle();
+      }
     }
   }
 
@@ -40,6 +54,7 @@
 
   function step() {
     var next = new Uint8Array(cols * rows);
+    var nextStyle = new Array(cols * rows);
     var alive = 0;
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < cols; x++) {
@@ -47,13 +62,18 @@
           at(x - 1, y - 1) + at(x, y - 1) + at(x + 1, y - 1) +
           at(x - 1, y)                     + at(x + 1, y) +
           at(x - 1, y + 1) + at(x, y + 1) + at(x + 1, y + 1);
-        var cur = at(x, y);
+        var i = y * cols + x;
+        var cur = grid[i];
         var val = cur ? (n === 2 || n === 3 ? 1 : 0) : (n === 3 ? 1 : 0);
-        next[y * cols + x] = val;
-        alive += val;
+        next[i] = val;
+        if (val) {
+          nextStyle[i] = cur ? style[i] : randomStyle();
+          alive++;
+        }
       }
     }
     grid = next;
+    style = nextStyle;
     if (alive < cols * rows * 0.02) seed();
   }
 
@@ -61,14 +81,19 @@
     var w = canvas.width / dpr;
     var h = canvas.height / dpr;
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = DOT_COLOR;
-    var r = CELL * 0.32;
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < cols; x++) {
-        if (grid[y * cols + x]) {
-          ctx.beginPath();
-          ctx.arc(x * CELL + CELL / 2, y * CELL + CELL / 2, r, 0, Math.PI * 2);
-          ctx.fill();
+        var i = y * cols + x;
+        if (grid[i]) {
+          var s = style[i];
+          var half = s.size / 2;
+          ctx.fillStyle = "rgba(" + ACCENT + ", " + s.alpha.toFixed(2) + ")";
+          ctx.fillRect(
+            x * CELL + CELL / 2 - half,
+            y * CELL + CELL / 2 - half,
+            s.size,
+            s.size
+          );
         }
       }
     }
