@@ -7,9 +7,12 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var CELL = 16;
-  var SEED_DENSITY = 0.18;
+  var SEED_DENSITY_MAX = 0.22;
+  var PATCH = 4; // coarse blocks used to vary seed density, so the
+                 // starting soup clumps unevenly instead of an even scatter
   var TICK_MS = 400;
   var ACCENT = "169, 72, 47";
+  var BG = "250, 246, 240"; // matches --bg, used for the vignette fade
 
   var cols, rows, grid, style, dpr;
 
@@ -25,23 +28,35 @@
     draw();
   }
 
-  // Each live cell gets its own random size/opacity, assigned once at
-  // birth and kept while it stays alive, so the pattern reads as
-  // textured/organic rather than a uniform field of identical marks.
+  // Each live cell gets its own random size/opacity/offset, assigned
+  // once at birth and kept while it stays alive, so the pattern reads
+  // as scattered and organic rather than a uniform grid of identical marks.
   function randomStyle() {
     return {
-      size: CELL * (0.34 + Math.random() * 0.4),
-      alpha: 0.08 + Math.random() * 0.2,
+      size: CELL * (0.28 + Math.random() * 0.55),
+      alpha: 0.05 + Math.random() * 0.16,
+      dx: (Math.random() - 0.5) * CELL * 0.4,
+      dy: (Math.random() - 0.5) * CELL * 0.4,
     };
   }
 
   function seed() {
     grid = new Uint8Array(cols * rows);
     style = new Array(cols * rows);
-    for (var i = 0; i < grid.length; i++) {
-      if (Math.random() < SEED_DENSITY) {
-        grid[i] = 1;
-        style[i] = randomStyle();
+    var patchCols = Math.ceil(cols / PATCH);
+    var patchRows = Math.ceil(rows / PATCH);
+    var density = new Array(patchCols * patchRows);
+    for (var p = 0; p < density.length; p++) {
+      density[p] = Math.random() * Math.random(); // biased low, occasional bursts
+    }
+    for (var y = 0; y < rows; y++) {
+      for (var x = 0; x < cols; x++) {
+        var p2 = Math.floor(y / PATCH) * patchCols + Math.floor(x / PATCH);
+        var i = y * cols + x;
+        if (Math.random() < density[p2] * SEED_DENSITY_MAX) {
+          grid[i] = 1;
+          style[i] = randomStyle();
+        }
       }
     }
   }
@@ -74,13 +89,14 @@
     }
     grid = next;
     style = nextStyle;
-    if (alive < cols * rows * 0.02) seed();
+    if (alive < cols * rows * 0.015) seed();
   }
 
   function draw() {
     var w = canvas.width / dpr;
     var h = canvas.height / dpr;
     ctx.clearRect(0, 0, w, h);
+
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < cols; x++) {
         var i = y * cols + x;
@@ -89,14 +105,26 @@
           var half = s.size / 2;
           ctx.fillStyle = "rgba(" + ACCENT + ", " + s.alpha.toFixed(2) + ")";
           ctx.fillRect(
-            x * CELL + CELL / 2 - half,
-            y * CELL + CELL / 2 - half,
+            x * CELL + CELL / 2 - half + s.dx,
+            y * CELL + CELL / 2 - half + s.dy,
             s.size,
             s.size
           );
         }
       }
     }
+
+    // Vignette: fade the pattern out toward the center so it stays
+    // clear of the name/tagline/intro text sitting on top of it.
+    var cx = w / 2;
+    var cy = h / 2;
+    var radius = Math.max(w, h) * 0.55;
+    var vignette = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+    vignette.addColorStop(0, "rgba(" + BG + ", 0.96)");
+    vignette.addColorStop(0.5, "rgba(" + BG + ", 0.65)");
+    vignette.addColorStop(1, "rgba(" + BG + ", 0)");
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, w, h);
   }
 
   var lastTick = 0;
