@@ -171,6 +171,31 @@ section h2 {
   margin: 0 0 8px;
   font-size: 1.05rem;
 }
+
+/* Flower gallery */
+.flower-grid {
+  column-count: 1;
+  column-gap: 14px;
+}
+@media (min-width: 540px) {
+  .flower-grid { column-count: 2; }
+}
+@media (min-width: 860px) {
+  .flower-grid { column-count: 3; }
+}
+.flower-grid img {
+  width: 100%;
+  display: block;
+  margin: 0 0 14px;
+  border-radius: 10px;
+  break-inside: avoid;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease;
+}
+.flower-grid img:hover {
+  transform: scale(1.02);
+}
+
 .card p {
   margin: 0 0 10px;
   color: var(--ink-soft);
