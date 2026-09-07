@@ -228,3 +228,9 @@ footer {
   color: var(--ink-soft);
   font-size: 0.85rem;
 }
+.closing-note {
+  margin: 14px 0 0;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
