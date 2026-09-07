@@ -7,7 +7,6 @@
   --card-bg: #ffffff;
   --border: #e4d8c8;
   --serif: "Spectral", Georgia, serif;
-  --sans: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -16,7 +15,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--sans);
+  font-family: var(--serif);
   line-height: 1.6;
 }
 
