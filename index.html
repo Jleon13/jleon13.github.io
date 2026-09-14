@@ -17,9 +17,10 @@
       <div class="links">
         <a href="#about">About</a>
         <a href="#education">Education</a>
-        <a href="#papers">Papers</a>
+        <a href="#research">Research</a>
+        <a href="#papers">Publications</a>
         <a href="#thesis">Theses</a>
-        <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a>
         <a href="blog/index.html">Writing</a>
         <a href="flowers/index.html">Flowers</a>
         <a href="#contact">Contact</a>
@@ -40,9 +41,9 @@
         everything, always tried.
       </p>
       <div class="social-links">
-        <a href="mailto:julian2258040@correo.uis.edu.co">Email</a>
+        <a href="mailto:julianleon_13@hotmail.com">Email</a>
         <a href="https://github.com/jleon13" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/nobodys-stache/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://linkedin.com/in/julián-david-león-quintero-950413258/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </header>
@@ -51,9 +52,12 @@
     <div class="wrap">
       <h2>About</h2>
       <p>
-        <!-- TODO: your longer bio paragraph(s) -->
-        Write a couple of paragraphs about yourself here: your background, your interests as a
-        writer, and what drives your work.
+        I'm a fourth-semester master's student in Applied Mathematics at Universidad Industrial
+        de Santander (UIS), with a background in Systems Engineering. My research is in
+        hyperspectral thermal infrared remote sensing, focused on inverse retrieval methods for
+        recovering atmospheric and object properties from hyperspectral data. I also teach —
+        I've been instructor of record for Differential Calculus at UIS and have taught a
+        thermal hyperspectral imaging course.
       </p>
     </div>
   </section>
@@ -63,33 +67,89 @@
       <h2>Education &amp; Experience</h2>
 
       <div class="timeline-item">
-        <div class="when">In progress</div>
-        <h3>MSc in Applied Mathematics</h3>
-        <p>Universidad Industrial de Santander (UIS)</p>
+        <div class="when">Feb 2025 — Present (expected 2026)</div>
+        <h3>M.Sc. Candidate, Applied Mathematics</h3>
+        <p>Universidad Industrial de Santander (UIS) &middot; GPA: 4.66/5.0</p>
+        <p>
+          Coursework: Mathematical Modelling, Functional Analysis, Linear Algebra, Ordinary
+          Differential Equations, Partial Differential Equations, Statistical Learning, Convex
+          Optimization.
+        </p>
+        <p>
+          <strong>Thesis:</strong> Estimation of atmospheric physicochemical properties from a
+          parametric model of hyperspectral infrared image acquisition, developed under the
+          AFOSR-SOARD grant. Advisor: Ph.D. Hoover Rueda-Chacón.
+        </p>
       </div>
 
       <div class="timeline-item">
-        <div class="when">Completed</div>
-        <h3>BSc in Computer Science</h3>
-        <p>Universidad Industrial de Santander (UIS)</p>
+        <div class="when">Nov 2019 — Nov 2024</div>
+        <h3>B.Sc., Systems Engineering</h3>
+        <p>Universidad Industrial de Santander (UIS) &middot; GPA: 4.1/4.2</p>
+        <p>Coursework: Computer Architecture, Algorithms, Computational Theory.</p>
       </div>
 
-      <!-- duplicate a .timeline-item block above for each entry, e.g. work experience -->
+      <div class="timeline-item">
+        <div class="when">Apr 2024 — Oct 2024</div>
+        <h3>Systems Engineer Intern — Electrificadora de Santander S.A.</h3>
+        <ul>
+          <li>Led business-process automation using Microsoft Power Platform (Power Automate, Power Apps), reducing manual intervention and improving execution times.</li>
+          <li>Designed and maintained Python scripts and SQL queries for large-scale data processing across systems.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <h2>Research</h2>
+
+      <div class="timeline-item">
+        <div class="when">Jul 2025 — Present</div>
+        <h3>Research Assistant — AFOSR-SOARD Grant</h3>
+        <p>
+          Universidad Industrial de Santander (UIS). Funded by the Air Force Office of Scientific
+          Research, South American Office of Aerospace Research and Development (AFOSR-SOARD).
+        </p>
+        <ul>
+          <li>Developed a HITRAN-based line-by-line atmospheric forward model for robust passive LWIR ranging, validated against RADIS and SpectralCalc.</li>
+          <li>Built joint inverse-retrieval solvers (Joint, Alternating Block-Coordinate Descent, and Null-Space Schur Complement) to disentangle atmospheric nuisance parameters from range and object properties — the basis of my M.Sc. thesis.</li>
+          <li>Working on simultaneous inverse retrieval of atmospheric parameters (air temperature, water vapor concentration) and object properties (emissivity, temperature) from single hyperspectral pixels.</li>
+          <li>In collaboration with Dr. Wellesley Pereira, also working on camouflaged target detection in spaceborne hyperspectral imagery, using GHOSt-04/05 satellite datasets (locations include Salon-de-Provence, Rena, Porton Down, and Fort Walker).</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="when">Feb 2023 — Jul 2023</div>
+        <h3>Research Assistant — Dual Blind Deconvolution for Joint Radar-Communications Processing (Project 9834)</h3>
+        <p>High Dimensional Signal Processing Group (HDSP), UIS.</p>
+        <ul>
+          <li>Literature review on graph theory and signal reconstruction, focusing on atomic-norm minimization for joint radar-and-communications signals under additive noise.</li>
+          <li>Evaluated and simulated randomly sampled signal reconstructions and supported presentations on the underlying theory.</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
   <section id="papers">
     <div class="wrap">
-      <h2>Papers</h2>
+      <h2>Publications</h2>
       <div class="project-grid">
 
         <div class="card">
           <h3>Multimodal Vision-Language Transformer for Thermography Breast Cancer Classification</h3>
-          <p>Guillermo Pinto, Julián León, Brayan Quintero, Dana Villamizar, Hoover Rueda-Chacón — accepted, IEEE.</p>
+          <p>Guillermo Pinto, Julián León, Brayan Quintero, Dana Villamizar, Hoover Rueda-Chacón — COLCACI 2025.</p>
           <a href="https://ieeexplore.ieee.org/abstract/document/11230909" target="_blank" rel="noopener">View on IEEE Xplore →</a>
         </div>
 
-        <!-- duplicate a .card block above for each additional paper -->
+        <div class="card">
+          <h3>Manuscript under review</h3>
+          <p>IEEE/CVF WACV 2027 — decision expected October 2026.</p>
+        </div>
+
+        <!-- duplicate a .card block above for each additional publication -->
 
       </div>
     </div>
@@ -104,7 +164,8 @@
           <h3>Estimation of Atmospheric Physicochemical Properties from a Parametric Model of Hyperspectral Infrared Image Acquisition</h3>
           <p>
             <!-- TODO: swap in figures and the PDF/repository link once ready -->
-            MSc thesis in Applied Mathematics, Universidad Industrial de Santander — in progress.
+            M.Sc. thesis in Applied Mathematics, Universidad Industrial de Santander — in
+            progress, developed under the AFOSR-SOARD grant. Advisor: Ph.D. Hoover Rueda-Chacón.
             Figures and the full PDF coming soon.
           </p>
         </div>
@@ -125,24 +186,52 @@
     </div>
   </section>
 
-  <section id="projects">
+  <section id="teaching">
     <div class="wrap">
-      <h2>Projects</h2>
+      <h2>Teaching</h2>
+
+      <div class="timeline-item">
+        <div class="when">2025-2</div>
+        <h3>Lecturer, Differential Calculus — UIS</h3>
+        <p>Instructor of record: designed and delivered the full course independently — lectures, assessments, and grading.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="when">2025-1</div>
+        <h3>Mathematics Instructor — Instituto Grupo Educativo "Marín Rosales" Ltda.</h3>
+      </div>
+
+      <p>
+        Also teaches a thermal hyperspectral imaging course (Jupyter-notebook-based materials
+        covering the radiative-transfer forward model and inverse retrieval methods).
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
       <div class="project-grid">
 
         <div class="card">
-          <h3>Project name</h3>
-          <p>One or two lines describing the project.</p>
-          <a href="#">View project →</a>
+          <h3>Programming</h3>
+          <p>Python, MATLAB, R, PyTorch</p>
         </div>
 
         <div class="card">
-          <h3>Project name</h3>
-          <p>One or two lines describing the project.</p>
-          <a href="#">View project →</a>
+          <h3>Methods</h3>
+          <p>Inverse problems, radiative transfer modeling, numerical optimization, Fisher/CRB information theory, hyperspectral signal processing</p>
         </div>
 
-        <!-- duplicate a .card block above for each project -->
+        <div class="card">
+          <h3>Tools</h3>
+          <p>HITRAN, SpectralCalc, RADIS</p>
+        </div>
+
+        <div class="card">
+          <h3>Languages</h3>
+          <p>Spanish (Native), English (B2+)</p>
+        </div>
 
       </div>
     </div>
@@ -174,9 +263,12 @@
     <div class="wrap">
       <h2>Contact</h2>
       <div class="contact-list">
-        <a href="mailto:julian2258040@correo.uis.edu.co">julian2258040@correo.uis.edu.co</a>
+        <a href="mailto:julianleon_13@hotmail.com">julianleon_13@hotmail.com</a>
+        <a href="tel:+573106512191">(+57) 310 651 2191</a>
         <a href="https://github.com/jleon13" target="_blank" rel="noopener">github.com/jleon13</a>
-        <a href="https://www.linkedin.com/in/nobodys-stache/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://linkedin.com/in/julián-david-león-quintero-950413258/" target="_blank" rel="noopener">LinkedIn</a>
+        <!-- TODO: add real Google Scholar link -->
+        <a href="#">Google Scholar</a>
       </div>
     </div>
   </section>

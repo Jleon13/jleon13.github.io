@@ -11,8 +11,8 @@
   var PATCH = 4; // coarse blocks used to vary seed density, so the
                  // starting soup clumps unevenly instead of an even scatter
   var TICK_MS = 400;
-  var ACCENT = "169, 72, 47";
-  var BG = "250, 246, 240"; // matches --bg, used for the vignette fade
+  var ACCENT = "15, 118, 110";
+  var BG = "243, 249, 248"; // matches --bg, used for the vignette fade
 
   var cols, rows, grid, style, dpr;
 
