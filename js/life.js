@@ -7,14 +7,14 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var CELL = 16;
-  var SEED_DENSITY_MAX = 0.22;
-  var PATCH = 4; // coarse blocks used to vary seed density, so the
-                 // starting soup clumps unevenly instead of an even scatter
+  var CELL_FILL = 0.86; // uniform, tetris-like blocks with a thin grid gap
+  var SEED_DENSITY = 0.18;
   var TICK_MS = 400;
   var ACCENT = "15, 118, 110";
+  var CELL_ALPHA = 0.38;
   var BG = "243, 249, 248"; // matches --bg, used for the vignette fade
 
-  var cols, rows, grid, style, dpr;
+  var cols, rows, grid, dpr;
 
   function resize() {
     var rect = hero.getBoundingClientRect();
@@ -28,36 +28,10 @@
     draw();
   }
 
-  // Each live cell gets its own random size/opacity/offset, assigned
-  // once at birth and kept while it stays alive, so the pattern reads
-  // as scattered and organic rather than a uniform grid of identical marks.
-  function randomStyle() {
-    return {
-      size: CELL * (0.28 + Math.random() * 0.55),
-      alpha: 0.05 + Math.random() * 0.16,
-      dx: (Math.random() - 0.5) * CELL * 0.4,
-      dy: (Math.random() - 0.5) * CELL * 0.4,
-    };
-  }
-
   function seed() {
     grid = new Uint8Array(cols * rows);
-    style = new Array(cols * rows);
-    var patchCols = Math.ceil(cols / PATCH);
-    var patchRows = Math.ceil(rows / PATCH);
-    var density = new Array(patchCols * patchRows);
-    for (var p = 0; p < density.length; p++) {
-      density[p] = Math.random() * Math.random(); // biased low, occasional bursts
-    }
-    for (var y = 0; y < rows; y++) {
-      for (var x = 0; x < cols; x++) {
-        var p2 = Math.floor(y / PATCH) * patchCols + Math.floor(x / PATCH);
-        var i = y * cols + x;
-        if (Math.random() < density[p2] * SEED_DENSITY_MAX) {
-          grid[i] = 1;
-          style[i] = randomStyle();
-        }
-      }
+    for (var i = 0; i < grid.length; i++) {
+      grid[i] = Math.random() < SEED_DENSITY ? 1 : 0;
     }
   }
 
@@ -69,7 +43,6 @@
 
   function step() {
     var next = new Uint8Array(cols * rows);
-    var nextStyle = new Array(cols * rows);
     var alive = 0;
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < cols; x++) {
@@ -77,19 +50,14 @@
           at(x - 1, y - 1) + at(x, y - 1) + at(x + 1, y - 1) +
           at(x - 1, y)                     + at(x + 1, y) +
           at(x - 1, y + 1) + at(x, y + 1) + at(x + 1, y + 1);
-        var i = y * cols + x;
-        var cur = grid[i];
+        var cur = at(x, y);
         var val = cur ? (n === 2 || n === 3 ? 1 : 0) : (n === 3 ? 1 : 0);
-        next[i] = val;
-        if (val) {
-          nextStyle[i] = cur ? style[i] : randomStyle();
-          alive++;
-        }
+        next[y * cols + x] = val;
+        alive += val;
       }
     }
     grid = next;
-    style = nextStyle;
-    if (alive < cols * rows * 0.015) seed();
+    if (alive < cols * rows * 0.02) seed();
   }
 
   function draw() {
@@ -97,18 +65,17 @@
     var h = canvas.height / dpr;
     ctx.clearRect(0, 0, w, h);
 
+    var size = CELL * CELL_FILL;
+    var half = size / 2;
+    ctx.fillStyle = "rgba(" + ACCENT + ", " + CELL_ALPHA + ")";
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < cols; x++) {
-        var i = y * cols + x;
-        if (grid[i]) {
-          var s = style[i];
-          var half = s.size / 2;
-          ctx.fillStyle = "rgba(" + ACCENT + ", " + s.alpha.toFixed(2) + ")";
+        if (grid[y * cols + x]) {
           ctx.fillRect(
-            x * CELL + CELL / 2 - half + s.dx,
-            y * CELL + CELL / 2 - half + s.dy,
-            s.size,
-            s.size
+            x * CELL + CELL / 2 - half,
+            y * CELL + CELL / 2 - half,
+            size,
+            size
           );
         }
       }

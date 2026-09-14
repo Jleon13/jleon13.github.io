@@ -32,9 +32,9 @@ a:hover { text-decoration: underline; }
 nav {
   position: sticky;
   top: 0;
-  background: rgba(250, 246, 240, 0.92);
+  background: #0b4f4a;
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #083b37;
   z-index: 10;
 }
 nav .wrap {
@@ -49,16 +49,16 @@ nav .brand {
   font-family: var(--serif);
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--ink);
+  color: #ffffff;
 }
 nav .links a {
-  color: var(--ink-soft);
+  color: #ffffff;
   margin-left: 20px;
   font-size: 0.95rem;
   font-weight: 500;
 }
 nav .links a:first-child { margin-left: 0; }
-nav .links a:hover { color: var(--accent); text-decoration: none; }
+nav .links a:hover { color: var(--accent-soft); text-decoration: none; }
 
 /* Hero */
 .hero {
